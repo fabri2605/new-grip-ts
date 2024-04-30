@@ -1,8 +1,15 @@
 <script>
-	import { Button, Search } from 'flowbite-svelte';
 	import GoHome from '../../components/GoHome.svelte';
 	import Pagination from '../../components/Pagination.svelte';
+	import SectionTitle from '../../components/SectionTitle.svelte';
 	import srvData from '../../components/data.json';
+	import { Button, Tabs, TabItem, Search } from 'flowbite-svelte';
+	import {
+		BriefcaseSolid,
+		GridSolid,
+		AdjustmentsVerticalSolid,
+		ClipboardSolid
+	} from 'flowbite-svelte-icons';
 
 	let selected = '';
 	let value = '';
@@ -19,23 +26,44 @@
 </script>
 
 <div class="p-4">
-	<h1 class="m-4 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Historial</h1>
+	<SectionTitle title="Historial" />
 
-	<div class="navbar">
-		<Button on:click={() => selecting('hoy')} outline={selected !== 0} color={'purple'}>Hoy</Button>
-		<Button on:click={() => selecting('ayer')} outline={selected !== 1} color={'purple'}
-			>Ayer</Button
-		>
-		<Button on:click={() => selecting('semana')} outline={selected !== 2} color={'purple'}
-			>Esta Semana</Button
-		>
-		<Button on:click={() => selecting('mas')} outline={selected !== 3} color={'purple'}
-			>Mas...</Button
-		>
-		<Button on:click={() => selecting('busqueda')} outline={selected !== 4} color={'purple'}
-			>Busquedas...</Button
-		>
-	</div>
+	<Tabs tabStyle="underline" defaultClass="flex justify-around flex-wrap">
+		<TabItem open on:click={() => selecting('hoy')}>
+			<div slot="title" class="flex items-center gap-2">
+				<BriefcaseSolid size="md" />
+				Hoy
+			</div>
+			<!-- <p class="text-sm text-gray-500 dark:text-gray-400">
+					<b>Profile:</b>
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+				</p> -->
+		</TabItem>
+		<TabItem on:click={() => selecting('ayer')}>
+			<div slot="title" class="flex items-center gap-2">
+				<GridSolid size="md" />
+				Ayer
+			</div>
+		</TabItem>
+		<TabItem on:click={() => selecting('semana')}>
+			<div slot="title" class="flex items-center gap-2">
+				<AdjustmentsVerticalSolid size="md" />
+				Esta Semana
+			</div>
+		</TabItem>
+		<TabItem on:click={() => selecting('mas')}>
+			<div slot="title" class="flex items-center gap-2">
+				<ClipboardSolid size="md" />
+				Mas..
+			</div>
+		</TabItem>
+		<TabItem on:click={() => selecting('busqueda')}>
+			<div slot="title" class="flex items-center gap-2">
+				<ClipboardSolid size="md" />
+				Busqueda
+			</div>
+		</TabItem>
+	</Tabs>
 
 	{#if selected !== 'busqueda'}
 		<Pagination data={srvData} filter={selected} filterAttr={'type'} pageSize={5} type={1} />

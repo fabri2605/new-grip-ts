@@ -45,7 +45,7 @@
 				? showingData[actualPage].filter((e) => e[filterAttr] === filter)
 				: showingData[actualPage]}
 			let:item
-			class="w-100 m-4"
+			class="w-100"
 		>
 			<div
 				style="text-align: left"

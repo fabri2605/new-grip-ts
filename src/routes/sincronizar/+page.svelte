@@ -3,6 +3,7 @@
 	import { onMount } from 'svelte';
 	import { InfoCircleSolid } from 'flowbite-svelte-icons';
 	import GoHome from '../../components/GoHome.svelte';
+	import SectionTitle from '../../components/SectionTitle.svelte';
 
 	let sincronized = false;
 
@@ -11,11 +12,11 @@
 			sincronized = true;
 		}, 1000);
 	});
+
 </script>
 
 <div class="p-4">
-	<h1 class="m-4 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Sincronizando</h1>
-
+	<SectionTitle title="Sincronización" />
 	<div class="info">
 		{#if !sincronized}
 			<Alert border color="yellow">

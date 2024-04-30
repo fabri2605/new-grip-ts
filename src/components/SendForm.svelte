@@ -12,7 +12,7 @@
   </script>
   
   <div class="text-center">
-    <Button on:click={() => (hidden3 = false)}>Show contact form</Button>
+    <Button on:click={() => (hidden3 = false)}>Contactenos!</Button>
   </div>
   <Drawer transitionType="fly" {transitionParams} bind:hidden={hidden3} id="sidebar3">
     <div class="flex items-center">
@@ -23,21 +23,21 @@
     </div>
     <form action="#" class="mb-6">
       <div class="mb-6">
-        <Label for="email" class="block mb-2">Your email</Label>
+        <Label for="email" class="block mb-2">Tu email</Label>
         <Input id="email" name="email" required placeholder="name@company.com" />
       </div>
       <div class="mb-6">
-        <Label for="subject" class="block mb-2">Subject</Label>
-        <Input id="subject" name="subject" required placeholder="Let us know how we can help you" />
+        <Label for="subject" class="block mb-2">Asunto</Label>
+        <Input id="subject" name="subject" required placeholder="Como podemos ayudarlo ..." />
       </div>
       <div class="mb-6">
-        <Label for="message" class="mb-2">Your message</Label>
-        <Textarea id="message" placeholder="Your message..." rows="4" name="message" />
+        <Label for="message" class="mb-2">Tu mensaje</Label>
+        <Textarea id="message" placeholder="Tu mensaje..." rows="4" name="message" />
       </div>
-      <Button type="submit" class="w-full">Send message</Button>
+      <Button type="submit" class="w-full">Enviar</Button>
     </form>
     <P class="mb-2 text-sm text-gray-500 dark:text-gray-400">
-      <A href="/" class="text-primary-600 hover:underline dark:text-primary-500">info@company.com</A>
+      <A href="/" class="text-primary-600 hover:underline dark:text-primary-500">treme@company.com</A>
     </P>
     <P class="text-sm text-gray-500 dark:text-gray-400">
       <A href="/" class="text-primary-600 hover:underline dark:text-primary-500">212-456-7890</A>

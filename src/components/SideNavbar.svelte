@@ -1,22 +1,4 @@
 <script>
-	import { onMount } from 'svelte';
-
-	export let darkModed;
-
-	let darked = true;
-	let beganBlack = true;
-
-	$: {
-		if(beganBlack){
-			darked = darkModed;
-		}else{
-			darked = !darkModed;
-		}
-	}
-
-	onMount(() => {
-		beganBlack = localStorage.getItem('color-theme') === 'dark';
-	});
 </script>
 
 <button
@@ -44,21 +26,11 @@
 
 <aside
 	id="default-sidebar"
-	class="fixed left-0 top-0 z-40 h-screen w-64 -translate-x-full transition-transform sm:translate-x-0"
+	class="my-aside fixed left-0 top-0 z-40 h-screen w-64 -translate-x-full transition-transform sm:translate-x-0  shadow-2xl"
 	aria-label="Sidebar"
 >
-	<div class="h-full overflow-y-auto bg-gray-100 px-3 py-4 dark:bg-gray-900">
+	<div class="h-full overflow-y-auto px-3 py-4 dark:bg-gray-900 bg-gray-100">
 		<ul class="space-y-2 font-medium">
-			<li>
-				<a href="/nuevo">
-					{#if darked}
-						<img alt="logo" src="/dark-logo.svg" id="navbar-logo" />
-					{/if}
-					{#if !darked}
-						<img alt="logo" src="/logo.svg" id="navbar-logo" />
-					{/if}
-				</a>
-			</li>
 			<li>
 				<a
 					href="/nuevo"
@@ -228,7 +200,7 @@
 </aside>
 
 <style>
-	#navbar-logo {
-		transform: scale(0.5);
+	.my-aside{
+		margin-top: 74px;
 	}
 </style>

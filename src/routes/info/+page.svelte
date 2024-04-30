@@ -1,10 +1,11 @@
 <script>
 	import SendForm from '../../components/SendForm.svelte';
 	import GoHome from '../../components/GoHome.svelte';
+	import SectionTitle from '../../components/SectionTitle.svelte';
 </script>
 
 <div  class="p-4">
-	<h1  class="m-4 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Info</h1>
+	<SectionTitle title="Info" />
 	<p class="mb-2 tracking-tight text-gray-900 dark:text-white">Informacion adicional sobre el sitio y/o dispositivo.</p>
 
     <div class="m-4 tracking-tight text-gray-900 dark:text-white">

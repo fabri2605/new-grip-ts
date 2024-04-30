@@ -1,32 +1,61 @@
 <script>
-	import { Button } from 'flowbite-svelte';
+	import { Tabs, TabItem } from 'flowbite-svelte';
+	import {
+		BriefcaseSolid,
+		GridSolid,
+		AdjustmentsVerticalSolid,
+		ClipboardSolid
+	} from 'flowbite-svelte-icons';
 	import Pagination from '../../components/Pagination.svelte';
 	import GoHome from '../../components/GoHome.svelte';
 	import srvData from '../../components/data.json';
+	import { onMount } from 'svelte';
+	import SectionTitle from '../../components/SectionTitle.svelte';
 
 	let selected = 'Borradores';
 
 	const selecting = (section) => {
 		selected = section;
 	};
+
+	onMount(() => {
+		let aux = document.getElementsByClassName('PRIME');
+		aux = [aux[0]];
+	});
 </script>
 
-<div class="m-2 text-center p-4">
-	<h1 class="m-4 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Pendientes</h1>
-
-	<div class="navbar">
-		<Button outline={selected !== 'Borradores'} on:click={() => selecting('Borradores')}
-			>Borradores</Button
-		>
-		<Button outline={selected !== 'Completar'} on:click={() => selecting('Completar')}
-			>Completar</Button
-		>
-		<Button outline={selected !== 'Revisar'} on:click={() => selecting('Revisar')}>Revisar</Button>
-		<Button outline={selected !== 'Emitidos'} on:click={() => selecting('Emitidos')}
-			>Emitidos</Button
-		>
-	</div>
-
+<div class="p-4">
+	<SectionTitle title="Pendientes" />
+	<Tabs tabStyle="underline" defaultClass="flex justify-around flex-wrap">
+		<TabItem open on:click={() => selecting('Borradores')}>
+			<div slot="title" class="flex items-center gap-2">
+				<BriefcaseSolid size="md" />
+				Borradores
+			</div>
+			<!-- <p class="text-sm text-gray-500 dark:text-gray-400">
+					<b>Profile:</b>
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+				</p> -->
+		</TabItem>
+		<TabItem on:click={() => selecting('Completar')}>
+			<div slot="title" class="flex items-center gap-2">
+				<GridSolid size="md" />
+				Completar
+			</div>
+		</TabItem>
+		<TabItem on:click={() => selecting('Revisar')}>
+			<div slot="title" class="flex items-center gap-2">
+				<AdjustmentsVerticalSolid size="md" />
+				Revisar
+			</div>
+		</TabItem>
+		<TabItem on:click={() => selecting('Emitidos')}>
+			<div slot="title" class="flex items-center gap-2">
+				<ClipboardSolid size="md" />
+				Emitidos
+			</div>
+		</TabItem>
+	</Tabs>
 	<Pagination data={srvData} filter={selected} filterAttr={'type'} pageSize={7} />
 
 	<GoHome />
@@ -35,14 +64,5 @@
 <style>
 	div {
 		text-align: center;
-	}
-	.navbar {
-		margin: 40px;
-		display: flex;
-		flex-direction: row;
-		justify-content: space-around;
-		align-items: center;
-		flex-wrap: wrap;
-		gap: 30px;
 	}
 </style>
