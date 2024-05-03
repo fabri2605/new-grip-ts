@@ -9,7 +9,7 @@
 	<SectionTitle title="Agregar un nuevo registro ..." />
 	&nbsp;
 
-	<Pagination data={srvData} type={1} pageSize={6} />
+	<Pagination data={srvData} pageSize={6} />
 
 	<GoHome />
 </div>

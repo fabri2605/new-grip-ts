@@ -1,11 +1,27 @@
 <script>
-	import { Listgroup } from 'flowbite-svelte';
-	import Carding from './Carding.svelte';
+	// @ts-nocheck
+
+	import {
+		Table,
+		TableBody,
+		TableBodyCell,
+		TableBodyRow,
+		TableHead,
+		TableHeadCell
+	} from 'flowbite-svelte';
+	import { writable } from 'svelte/store';
+
+	/**
+	 * @type {never[]}
+	 */
 	export let data = [];
+	/**
+	 * @type {any[]}
+	 */
+	let showingData = [];
 	export let filter = '';
 	export let filterAttr = '';
 	export let pageSize = 5;
-	export let type = 1;
 
 	let actualPage = 0;
 	$: totalItems = filter ? data.filter((e) => e[filterAttr] === filter).length : data.length;
@@ -16,22 +32,19 @@
 		makingPages(filter ? data.filter((e) => e[filterAttr] === filter) : data, pageSize);
 	}
 
-	let showingData = [];
-
-	const makingPages = (arr, size) => {
+	const makingPages = (/** @type {string | any[]} */ arr, /** @type {number} */ size) => {
 		showingData = [];
 		for (let j = 0; j < Math.ceil(arr.length / size); j++) {
 			showingData.push([]);
 			for (let i = 0; i < size; i++) {
 				showingData[j] = [...showingData[j], arr[size * j + i]];
 			}
-			showingData[j] = showingData[j].filter((e) => e !== undefined);
+			showingData[j] = showingData[j].filter((/** @type {undefined} */ e) => e !== undefined);
 		}
 		showingData = showingData;
 	};
 
 	makingPages(data, pageSize);
-
 	let nonSelectedClass =
 		'flex h-8 items-center justify-center border border-gray-300 bg-white px-3 leading-tight text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white';
 	let selectedClass =
@@ -39,31 +52,32 @@
 </script>
 
 {#if showingData}
-	{#if type == 1}
-		<Listgroup
-			items={filter
-				? showingData[actualPage].filter((e) => e[filterAttr] === filter)
-				: showingData[actualPage]}
-			let:item
-			class="w-100"
-		>
-			<div
-				style="text-align: left"
-				class="m-2 cursor-pointer text-gray-900 transition-colors duration-300 dark:text-white"
-			>
-				<a href="/forms/{item.id}">
-					{item.title}<!--  Formulario prueba 18-01-2024 11:43:08 -->
-				</a>
-			</div>
-		</Listgroup>
-	{/if}
-	{#if type == 2}
-		<div class="flex flex-wrap justify-center align-center direction-row gap-4">
+	<Table hoverable={true} shadow class="shadow-lg baby">
+		<!-- <caption class="p-5 text-lg font-semibold text-left text-gray-900 bg-white dark:text-white dark:bg-gray-800">
+			Our products
+			<p class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400">Browse a list of Flowbite products designed to help you work and play, stay organized, get answers, keep in touch, grow your business, and more.</p>
+		  </caption> -->
+		<TableHead>
+			<TableHeadCell on:click={() => sortTable('id')}>ID</TableHeadCell>
+			<TableHeadCell on:click={() => sortTable('title')}>Titulo</TableHeadCell>
+			<TableHeadCell on:click={() => sortTable('version')}>Version</TableHeadCell>
+			<TableHeadCell on:click={() => sortTable('active')}>Activo</TableHeadCell>
+			<TableHeadCell on:click={() => sortTable('desc')}>Descripcion</TableHeadCell>
+			<TableHeadCell on:click={() => sortTable('type')}>Tipo</TableHeadCell>
+		</TableHead>
+		<TableBody tableBodyClass="divide-y">
 			{#each filter ? showingData[actualPage].filter((e) => e[filterAttr] === filter) : showingData[actualPage] as item}
-				<Carding title={item.title} subtitle={item?.subtitle} version={item?.version} active={item?.active} id={item?.id} />
+				<TableBodyRow on:click={()=>{window.location.href=item.id}} class="cursor-pointer">
+					<TableBodyCell>{item.id}</TableBodyCell>
+					<TableBodyCell>{item.title}</TableBodyCell>
+					<TableBodyCell>{item.version}</TableBodyCell>
+					<TableBodyCell>{item.active}</TableBodyCell>
+					<TableBodyCell>{item.subtitle}</TableBodyCell>
+					<TableBodyCell>{item.type}</TableBodyCell>
+				</TableBodyRow>
 			{/each}
-		</div>
-	{/if}
+		</TableBody>
+	</Table>
 	&nbsp;
 	<div>
 		<nav aria-label="Page navigation example">

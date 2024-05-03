@@ -46,7 +46,7 @@
 	class="my-aside absolute left-0 top-0 z-30 h-screen w-64 -translate-x-full shadow-2xl transition-transform sm:translate-x-0"
 	aria-label="Sidebar"
 >
-	<div class="h-full overflow-y-auto bg-gray-100 px-3 py-4 dark:bg-gray-900">
+	<div class="h-full overflow-y-auto bg-gray-200 px-3 py-4 dark:bg-gray-900">
 		<ul class="space-y-2 font-medium">
 			{#if showSincButt}
 				<li>
@@ -68,7 +68,7 @@
 					href="/nuevo"
 					class="group flex items-center rounded-lg p-2 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
 				>
-					<ChartPieSolid size="lg" class="text-gray-400" />
+					<ChartPieSolid size="lg" class="text-gray-500 dark:text-gray-400" />
 					<span class="ms-3">Nuevo</span>
 					<span
 						class="ms-3 inline-flex h-3 w-3 items-center justify-center rounded-full bg-blue-100 p-3 text-sm font-medium text-blue-800 dark:bg-blue-900 dark:text-blue-300"
@@ -81,7 +81,7 @@
 					href="/pendientes"
 					class="group flex items-center rounded-lg p-2 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
 				>
-					<MailBoxSolid size="lg" class="text-gray-400" />
+					<MailBoxSolid size="lg" class="text-gray-500 dark:text-gray-400" />
 					<span class="ms-3 flex-1 whitespace-nowrap">Pendientes</span>
 					<span
 						class="ms-3 inline-flex h-3 w-3 items-center justify-center rounded-full bg-blue-100 p-3 text-sm font-medium text-blue-800 dark:bg-blue-900 dark:text-blue-300"
@@ -91,10 +91,6 @@
 						class="ms-3 inline-flex h-3 w-3 items-center justify-center rounded-full bg-green-100 p-3 text-sm font-medium text-blue-800 dark:bg-blue-900 dark:text-blue-300"
 						>0</span
 					>
-					<span
-						class="ms-3 inline-flex h-3 w-3 items-center justify-center rounded-full bg-orange-100 p-3 text-sm font-medium text-blue-800 dark:bg-blue-900 dark:text-blue-300"
-						>0</span
-					>
 				</a>
 			</li>
 			<li>
@@ -102,7 +98,7 @@
 					href="/historial"
 					class="group flex items-center rounded-lg p-2 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
 				>
-					<CalendarMonthSolid size="lg" class="text-gray-400" />
+					<CalendarMonthSolid size="lg" class="text-gray-500 dark:text-gray-400" />
 
 					<span class="ms-3 flex-1 whitespace-nowrap">Historial</span>
 				</a>
@@ -112,7 +108,7 @@
 					href="/sesion"
 					class="group flex items-center rounded-lg p-2 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
 				>
-					<UserSettingsSolid size="lg" class="text-gray-400" />
+					<UserSettingsSolid size="lg" class="text-gray-500 dark:text-gray-400" />
 
 					<span class="ms-3 flex-1 whitespace-nowrap">Mi sesion</span>
 				</a>
@@ -122,7 +118,7 @@
 					href="/info"
 					class="group flex items-center rounded-lg p-2 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
 				>
-					<ClipboardSolid size="lg" class="text-gray-400" />
+					<ClipboardSolid size="lg" class="text-gray-500 dark:text-gray-400" />
 
 					<span class="ms-3 flex-1 whitespace-nowrap">Info</span>
 				</a>

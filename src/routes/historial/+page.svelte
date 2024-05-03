@@ -8,9 +8,37 @@
 		BriefcaseSolid,
 		GridSolid,
 		AdjustmentsVerticalSolid,
-		ClipboardSolid
+		ClipboardSolid,
+		SearchSolid
 	} from 'flowbite-svelte-icons';
 
+	let selectables = [
+		{
+			title: 'Hoy',
+			select: 'hoy',
+			icon: BriefcaseSolid
+		},
+		{
+			title: 'Ayer',
+			select: 'ayer',
+			icon: GridSolid
+		},
+		{
+			title: 'Esta Semana',
+			select: 'sem',
+			icon: AdjustmentsVerticalSolid
+		},
+		{
+			title: 'Mas..',
+			select: 'mas',
+			icon: ClipboardSolid
+		},
+		{
+			title: 'Busqueda',
+			select: 'busqueda',
+			icon: SearchSolid
+		}
+	];
 	let selected = '';
 	let value = '';
 	let searched = [];
@@ -20,54 +48,30 @@
 	};
 
 	const searching = () => {
-		console.log(value);
 		searched = srvData.filter((e) => e.title.toLowerCase().includes(value.toLowerCase()));
 	};
 </script>
 
 <div class="p-4">
 	<SectionTitle title="Historial" />
-
-	<Tabs tabStyle="underline" defaultClass="flex justify-around flex-wrap">
-		<TabItem open on:click={() => selecting('hoy')}>
-			<div slot="title" class="flex items-center gap-2">
-				<BriefcaseSolid size="md" />
-				Hoy
-			</div>
-			<!-- <p class="text-sm text-gray-500 dark:text-gray-400">
-					<b>Profile:</b>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-				</p> -->
-		</TabItem>
-		<TabItem on:click={() => selecting('ayer')}>
-			<div slot="title" class="flex items-center gap-2">
-				<GridSolid size="md" />
-				Ayer
-			</div>
-		</TabItem>
-		<TabItem on:click={() => selecting('semana')}>
-			<div slot="title" class="flex items-center gap-2">
-				<AdjustmentsVerticalSolid size="md" />
-				Esta Semana
-			</div>
-		</TabItem>
-		<TabItem on:click={() => selecting('mas')}>
-			<div slot="title" class="flex items-center gap-2">
-				<ClipboardSolid size="md" />
-				Mas..
-			</div>
-		</TabItem>
-		<TabItem on:click={() => selecting('busqueda')}>
-			<div slot="title" class="flex items-center gap-2">
-				<ClipboardSolid size="md" />
-				Busqueda
-			</div>
-		</TabItem>
+	<Tabs
+		tabStyle="underline"
+		defaultClass="flex justify-around flex-wrap"
+		contentClass="bg-transparent"
+	>
+		{#each selectables as item}
+			<TabItem open={item.select === 'hoy'} on:click={() => selecting(item.select)}>
+				<div slot="title" class="flex items-center gap-2">
+					<svelte:component this={item.icon} size="md" />
+					{item.title}
+				</div>
+				{#if selected !== 'busqueda'}
+					&nbsp;
+					<Pagination data={srvData} filter={selected} filterAttr={'type'} pageSize={5} type={1} />
+				{/if}
+			</TabItem>
+		{/each}
 	</Tabs>
-
-	{#if selected !== 'busqueda'}
-		<Pagination data={srvData} filter={selected} filterAttr={'type'} pageSize={5} type={1} />
-	{/if}
 
 	{#if selected === 'busqueda'}
 		<div class="search-bar m-auto">
@@ -78,7 +82,7 @@
 			&nbsp;
 		</div>
 		{#if searched.length}
-			<Pagination data={searched} pageSize={6} type={2} />
+			<Pagination data={searched} pageSize={6} />
 		{/if}
 	{/if}
 

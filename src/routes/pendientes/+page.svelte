@@ -12,6 +12,29 @@
 	import { onMount } from 'svelte';
 	import SectionTitle from '../../components/SectionTitle.svelte';
 
+	let selectables = [
+		{
+			title: 'Borradores',
+			select: 'Borradores',
+			icon: BriefcaseSolid
+		},
+		{
+			title: 'Completar',
+			select: 'Completar',
+			icon: GridSolid
+		},
+		{
+			title: 'Revisar',
+			select: 'Revisar',
+			icon: AdjustmentsVerticalSolid
+		},
+		{
+			title: 'Emitidos',
+			select: 'Emitidos',
+			icon: ClipboardSolid
+		}
+	];
+
 	let selected = 'Borradores';
 
 	const selecting = (section) => {
@@ -26,36 +49,21 @@
 
 <div class="p-4">
 	<SectionTitle title="Pendientes" />
-	<Tabs tabStyle="underline" defaultClass="flex justify-around flex-wrap">
-		<TabItem open on:click={() => selecting('Borradores')}>
-			<div slot="title" class="flex items-center gap-2">
-				<BriefcaseSolid size="md" />
-				Borradores
-			</div>
-			<!-- <p class="text-sm text-gray-500 dark:text-gray-400">
-					<b>Profile:</b>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-				</p> -->
-		</TabItem>
-		<TabItem on:click={() => selecting('Completar')}>
-			<div slot="title" class="flex items-center gap-2">
-				<GridSolid size="md" />
-				Completar
-			</div>
-		</TabItem>
-		<TabItem on:click={() => selecting('Revisar')}>
-			<div slot="title" class="flex items-center gap-2">
-				<AdjustmentsVerticalSolid size="md" />
-				Revisar
-			</div>
-		</TabItem>
-		<TabItem on:click={() => selecting('Emitidos')}>
-			<div slot="title" class="flex items-center gap-2">
-				<ClipboardSolid size="md" />
-				Emitidos
-			</div>
-		</TabItem>
+	<Tabs
+		tabStyle="underline"
+		defaultClass="flex justify-around flex-wrap m-0"
+		contentClass="bg-transparent"
+	>
+		{#each selectables as item}
+			<TabItem open={item.select === 'Borradores'} on:click={() => selecting(item.select)}>
+				<div slot="title" class="flex items-center gap-2">
+					<svelte:component this={item.icon} size="md" />
+					{item.title}
+				</div>
+			</TabItem>
+		{/each}
 	</Tabs>
+	&nbsp;
 	<Pagination data={srvData} filter={selected} filterAttr={'type'} pageSize={7} />
 
 	<GoHome />
