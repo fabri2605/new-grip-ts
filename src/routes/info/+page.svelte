@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import SendForm from '../../components/SendForm.svelte';
 	import GoHome from '../../components/GoHome.svelte';
 	import SectionTitle from '../../components/SectionTitle.svelte';

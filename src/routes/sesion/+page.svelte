@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import GoHome from '../../components/GoHome.svelte';
 	import SectionTitle from '../../components/SectionTitle.svelte';
 	import { Tabs, TabItem, GradientButton } from 'flowbite-svelte';
@@ -34,7 +34,7 @@
 
 	let selected = 0;
 
-	const selecting = (num) => {
+	const selecting = (num : number) => {
 		selected = num;
 	};
 </script>

@@ -1,5 +1,5 @@
-<script>
-	import Pagination from '../../components/Pagination.svelte';
+<script lang="ts">
+	import PersonalPagination from '../../components/Pagination/PersonalPagination.ts';
 	import GoHome from '../../components/GoHome.svelte';
 	import srvData from '../../components/data.json';
 	import SectionTitle from '../../components/SectionTitle.svelte';
@@ -9,7 +9,7 @@
 	<SectionTitle title="Agregar un nuevo registro ..." />
 	&nbsp;
 
-	<Pagination data={srvData} pageSize={6} />
+	<PersonalPagination data={srvData} pageSize={6} />
 
 	<GoHome />
 </div>

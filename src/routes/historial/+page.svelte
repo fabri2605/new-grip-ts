@@ -1,8 +1,8 @@
-<script>
+<script lang="ts">
 	import GoHome from '../../components/GoHome.svelte';
-	import Pagination from '../../components/Pagination.svelte';
 	import SectionTitle from '../../components/SectionTitle.svelte';
 	import srvData from '../../components/data.json';
+	import PersonalPagination from '../../components/Pagination/PersonalPagination.svelte';
 	import { Button, Tabs, TabItem, Search } from 'flowbite-svelte';
 	import {
 		BriefcaseSolid,
@@ -11,6 +11,8 @@
 		ClipboardSolid,
 		SearchSolid
 	} from 'flowbite-svelte-icons';
+
+	import type { formObj } from '../../components/Interfaces';
 
 	let selectables = [
 		{
@@ -41,9 +43,9 @@
 	];
 	let selected = '';
 	let value = '';
-	let searched = [];
+	let searched: Array<formObj> = [];
 
-	const selecting = (section) => {
+	const selecting = (section : string) => {
 		/* selected = section; */
 	};
 
@@ -67,7 +69,8 @@
 				</div>
 				{#if selected !== 'busqueda'}
 					&nbsp;
-					<Pagination data={srvData} filter={selected} filterAttr={'type'} pageSize={5} type={1} />
+					<PersonalPagination data={srvData} pageSize={5} />
+					<!-- <Pagination data={srvData} filter={selected} filterAttr={'type'} pageSize={5} type={1} /> -->
 				{/if}
 			</TabItem>
 		{/each}

@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { Tabs, TabItem } from 'flowbite-svelte';
 	import {
 		BriefcaseSolid,
@@ -6,7 +6,7 @@
 		AdjustmentsVerticalSolid,
 		ClipboardSolid
 	} from 'flowbite-svelte-icons';
-	import Pagination from '../../components/Pagination.svelte';
+	import PersonalPagination from '../../components/Pagination/PersonalPagination.ts';
 	import GoHome from '../../components/GoHome.svelte';
 	import srvData from '../../components/data.json';
 	import { onMount } from 'svelte';
@@ -37,12 +37,12 @@
 
 	let selected = 'Borradores';
 
-	const selecting = (section) => {
+	const selecting = (section : string) => {
 		selected = section;
 	};
 
 	onMount(() => {
-		let aux = document.getElementsByClassName('PRIME');
+		let aux : any = document.getElementsByClassName('PRIME');
 		aux = [aux[0]];
 	});
 </script>
@@ -64,7 +64,7 @@
 		{/each}
 	</Tabs>
 	&nbsp;
-	<Pagination data={srvData} filter={selected} filterAttr={'type'} pageSize={7} />
+	<PersonalPagination data={srvData} filterin={selected} filterAttr={'type'} pageSize={7} />
 
 	<GoHome />
 </div>
