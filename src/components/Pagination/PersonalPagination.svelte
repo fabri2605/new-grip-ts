@@ -12,12 +12,14 @@
 	export let data: Array<formObj> = [];
 
 	let showingData: Array<Array<formObj>> = [];
-	export let filterin : keyof formObj | '' = '';
+	export let filterin: keyof formObj | '' = '';
 	export let filterAttr = '';
 	export let pageSize = 5;
 
 	let actualPage = 0;
-	$: totalItems = filterin ? data.filter((e: formObj) => e[filterAttr as keyof formObj] === filterin).length : data.length;
+	$: totalItems = filterin
+		? data.filter((e: formObj) => e[filterAttr as keyof formObj] === filterin).length
+		: data.length;
 	$: totalPages = Math.ceil(totalItems / pageSize);
 
 	$: {
@@ -38,7 +40,7 @@
 	};
 
 	const sortTable = (some: string) => {
-		console.log(some);
+		/* console.log(some); */
 	};
 
 	makingPages(data, pageSize);
@@ -46,8 +48,6 @@
 		'flex h-8 items-center justify-center border border-gray-300 bg-white px-3 leading-tight text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white';
 	let selectedClass =
 		'flex h-8 items-center justify-center border border-gray-300 bg-blue-50 px-3 text-blue-600 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white';
-
-	console.log(showingData);
 </script>
 
 {#if showingData.length}
@@ -57,7 +57,8 @@
 			<p class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400">Browse a list of Flowbite products designed to help you work and play, stay organized, get answers, keep in touch, grow your business, and more.</p>
 		  </caption> -->
 		<TableHead>
-			<TableHeadCell on:click={() => sortTable('id')}>ID</TableHeadCell>
+			<TableHeadCell on:click={() => sortTable('id')}>ID</TableHeadCell
+			><!-- class="cursor-pointer" -->
 			<TableHeadCell on:click={() => sortTable('title')}>Titulo</TableHeadCell>
 			<TableHeadCell on:click={() => sortTable('version')}>Version</TableHeadCell>
 			<TableHeadCell on:click={() => sortTable('active')}>Activo</TableHeadCell>
@@ -71,11 +72,16 @@
 						window.location.href = String(item.id);
 					}}
 					class="cursor-pointer"
-				> 
+				>
 					<TableBodyCell>{item.id}</TableBodyCell>
 					<TableBodyCell>{item.title}</TableBodyCell>
 					<TableBodyCell>{item.version}</TableBodyCell>
-					<TableBodyCell>{item.active}</TableBodyCell>
+					<TableBodyCell
+						class={item.active
+							? 'text-green-600 dark:text-green-600'
+							: 'text-red-500 dark:text-red-500'}
+						>{item.active ? 'Activo' : 'No activo'}</TableBodyCell
+					>
 					<TableBodyCell>{item.subtitle}</TableBodyCell>
 					<TableBodyCell>{item.type}</TableBodyCell>
 				</TableBodyRow>
@@ -88,23 +94,36 @@
 			<ul class="inline-flex -space-x-px text-sm">
 				<li>
 					<a
-						on:click={() => actualPage !== 0 && actualPage--}
-						class="cursor-pointer ms-0 flex h-8 items-center justify-center rounded-s-lg border border-e-0 border-gray-300 bg-white px-3 leading-tight text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+						href="#no-action"
+						on:click={(event) => {
+							event.preventDefault();
+							actualPage !== 0 && actualPage--;
+						}}
+						class="ms-0 flex h-8 cursor-pointer items-center justify-center rounded-s-lg border border-e-0 border-gray-300 bg-white px-3 leading-tight text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
 						>Previous</a
 					>
 				</li>
 				{#each Array(totalPages) as _, idx}
 					<li>
 						<a
-							on:click={() => (actualPage = idx)}
-							class="{actualPage === idx ? selectedClass : nonSelectedClass} cursor-pointer">{idx + 1}</a
-						 >
+							href="#no-action"
+							on:click={(event) => {
+								event.preventDefault();
+								actualPage = idx;
+							}}
+							class="{actualPage === idx ? selectedClass : nonSelectedClass} cursor-pointer"
+							>{idx + 1}</a
+						>
 					</li>
 				{/each}
 				<li>
 					<a
-						on:click={() => actualPage !== totalPages - 1 && actualPage++}
-						class="cursor-pointer flex h-8 items-center justify-center rounded-e-lg border border-gray-300 bg-white px-3 leading-tight text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+						href="#no-action"
+						on:click={(event) => {
+							event.preventDefault();
+							actualPage !== totalPages - 1 && actualPage++;
+						}}
+						class="flex h-8 cursor-pointer items-center justify-center rounded-e-lg border border-gray-300 bg-white px-3 leading-tight text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
 						>Next</a
 					>
 				</li>

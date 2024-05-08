@@ -85,7 +85,7 @@
 			&nbsp;
 		</div>
 		{#if searched.length}
-			<Pagination data={searched} pageSize={6} />
+			<PersonalPagination data={searched} pageSize={6} />
 		{/if}
 	{/if}
 
@@ -95,15 +95,6 @@
 <style>
 	div {
 		text-align: center;
-	}
-	.navbar {
-		margin: 40px;
-		display: flex;
-		flex-direction: row;
-		justify-content: space-around;
-		align-items: center;
-		flex-wrap: wrap;
-		gap: 30px;
 	}
 	.search-bar {
 		width: 500px;
